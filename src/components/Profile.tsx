@@ -1,22 +1,26 @@
-import Profile from "@/components/Profile";
 import { createSupabaseServerClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
 
 export async function getUser() {
   const supabase = createSupabaseServerClient();
   const {
     data: { user },
+    error,
   } = await supabase.auth.getUser();
+
+  if (error) {
+    throw new Error(error.message);
+  }
 
   return user;
 }
 
-export default async function Index() {
+export default async function Profile() {
   const user = await getUser();
 
-  if (!user) {
-    redirect("/auth/signIn");
-  }
-
-  return <Profile />;
+  return (
+    <div>
+      <div>이름: {user?.user_metadata?.user_name}</div>
+      <div>이메일: {user?.email}</div>
+    </div>
+  );
 }
