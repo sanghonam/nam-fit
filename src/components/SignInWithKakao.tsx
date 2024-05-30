@@ -1,20 +1,13 @@
 "use client";
 
-import { createSupabaseBrowserClient } from "@/utils/supabase/client";
+import { signInWithKakao } from "@/api/auth";
 
 const SignInWithKakao = () => {
-  const supabase = createSupabaseBrowserClient();
-
-  const signInWithKakao = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "kakao",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
+  const handleSignInButtonClick = async () => {
+    await signInWithKakao();
   };
 
-  return <button onClick={signInWithKakao}>SignIn with Kakao</button>;
+  return <button onClick={handleSignInButtonClick}>SignIn with Kakao</button>;
 };
 
 export default SignInWithKakao;
