@@ -1,4 +1,3 @@
-import Profile from "@/components/Profile";
 import { createSupabaseServerClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -18,5 +17,9 @@ export default async function Index() {
     redirect("/auth/signIn");
   }
 
-  return <Profile />;
+  if (user) {
+    redirect("/planner");
+  }
+
+  return <div></div>;
 }
