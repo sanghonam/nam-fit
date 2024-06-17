@@ -13,13 +13,5 @@ export async function getUser() {
 export default async function Index() {
   const user = await getUser();
 
-  if (!user) {
-    redirect("/auth/signIn");
-  }
-
-  if (user) {
-    redirect("/planner");
-  }
-
-  return <div></div>;
+  return redirect(!user ? "/auth/signIn" : "/workouts");
 }

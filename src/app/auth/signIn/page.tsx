@@ -1,4 +1,4 @@
-import SignInWithKakao from "@/components/SignInWithKakao";
+import SignInWithKakao from "@/components/auth/SignInWithKakao";
 
 const SignIn = () => {
   return <SignInWithKakao />;

@@ -32,16 +32,16 @@ export default function WorkoutsPlan() {
     getWorkoutsByDate(selectedDate)
   );
 
-  if (workouts?.length === 0 && !isLoading) {
-    return <NoDataMessage>등록된 운동 계획이 없습니다.</NoDataMessage>;
-  }
+  const hasWorkouts = workouts?.length === 0 && !isLoading;
 
   return (
     <div>
       <AddWorkoutButton />
-      {workouts?.map((workout) => (
-        <Workout key={workout.id} {...workout} />
-      ))}
+      {hasWorkouts ? (
+        <NoDataMessage>등록된 운동 계획이 없습니다.</NoDataMessage>
+      ) : (
+        workouts?.map((workout) => <Workout key={workout.id} {...workout} />)
+      )}
     </div>
   );
 }
