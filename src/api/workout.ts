@@ -3,10 +3,9 @@ import { Dayjs } from "dayjs";
 
 const TABLE_NAME = "workouts";
 
-export const getWorkoutByDate = (date: Dayjs) =>
+export const getWorkoutsByDate = (date: Dayjs) =>
   createSupabaseBrowserClient()
     .from(TABLE_NAME)
-    .select("workout_date, exercise_name")
+    .select(`*, sets(*)`)
     .eq("workout_date", date)
-    .throwOnError()
-    .maybeSingle();
+    .throwOnError();
